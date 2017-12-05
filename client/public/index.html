@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>First Postgres Template</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./public/styles.css">
+</head>
+<body>
+	<h1 class="text-center">Welcome to your Bulletin Board!</h1>
+	<br>
+	<h3 class="text-center">Leave a message title and a note!</h3>
+	<div class="text-center center-block">
+		<form id="bulletin-form">
+			<label>Title</label><br>
+			<input type="text" id="title-input"/><br>
+			<label>Message</label><br>
+			<textarea id="message-input"></textarea>
+			<br>
+			<input class="btn btn-info" id="form-submit" type="submit">
+		</form>
+	</div>
+	<div id="everything-div"></div>
+	<div id = "update-message-modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content text-center">
+				<div class="modal-header">
+					<h2>Update Message</h2>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./public/app.js"></script>
+</body>
+</html>
