@@ -30,14 +30,17 @@ router.get('/', function(req,res){
 });
 
 router.post('/api/bulletins', function(req, res){
+	// console.log(req.body.title)
+	// console.log(req.body.body)
 	if(req.body.title !=='' && req.body.body !==''){
-		var bulletinQuery = 'INSERT INTO bulletinboard (title, body), VALUES ($1, $2)';
+	
+		var bulletinQuery = "INSERT INTO messages (title, body) VALUES ($1, $2)";
 		pgClient.query(bulletinQuery, [req.body.title, req.body.body], function(error, queryRes){
 			if(error){
 				res.json(error)
 			} else {
 				res.json(queryRes)
-				console.log(req.body)
+				console.log(queryRes)
 			}
 		});
 	} else if (req.body.title =='' && req.body.body !==''){
@@ -52,20 +55,38 @@ router.post('/api/bulletins', function(req, res){
 	}
 });
 
-
+//shows all messages from my table in the web browser
 router.get('/api/homepage', function(req, res){
-	pgClient.query("SELECT * FROM bulletinboard", (error,queryResTwo)=>{
+	pgClient.query("SELECT * FROM messages", (error,queryResTwo)=>{
 		if(error){
 			res.json(error)
 		} else {
 			res.json(queryResTwo)
-			console.log(queryResTwo)
+			//console.log(queryResTwo)
 		}
 	});
 });
 
+//Delete route so that when I x-out of a message it is removed.
+router.delete('/api/delete-post/:id', function(req, res){
+	pgClient.query("DELETE FROM messages WHERE id=" + req.params.id, function(err, res){
+		if (err){
+			console.log(error)
+		}
+	});
+});
 
+//Put route so that I can click on and update messages in a modal.
 
+router.put('/api/update-post:id', function(req, res){
+	pgClient.query("UPDATE messages SET body=$1 WHERE id="+ req.params.id, function(err,res){
+		if(err){
+			console.log(error)
+		} 
+		console.log("updated successfully")
+		res.json("Message has been updated")
+	})
+})
 
 
 
