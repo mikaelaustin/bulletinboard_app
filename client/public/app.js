@@ -84,7 +84,7 @@ $(document).ready(function(){
 			url: '/api/homepage'
 
 		}).then(function(messages){
-			for(i=0;i<messages.rows.length; i++){
+			for(i=0;i < messages.rows.length; i++){
 				if(messages.rows[i].id===postID){
 					var newMessage = $('<textarea id= "new-message">')
 					newMessage.val(messages.rows[i].body)
@@ -94,29 +94,26 @@ $(document).ready(function(){
 			}
 			var updateButton = $('<button>');
 			updateButton.addClass('btn btn-info enter-button');
-			updateButton.attr('data-id', postID)
+			updateButton.attr('data-id', postID); 
 			updateButton.text('Update Message');
 			inputDiv.append('<br>').append(updateButton);
 		})
 		$('.modal-body').append(inputDiv);
 	})
-
 //ajax call to actually be able to update text and have it save on the submit button
-
 	$(document).on('click', '.enter-button', function(){
-		var updatedMsg = ('#new-message').val()
+		var updatedMsg = $('#new-message').val()
 
 		if(updatedMsg !=''){
 
 			$.ajax({
-				method: 'PULL',
+				method: 'PUT',
 				url: '/api/update-post/'+ $(this).data('id'),
 				data: {message: updatedMsg}
 			}).then(function(res){
 				addBulletin();
 				$('#update-message-modal').modal('toggle');
 			});
-
 		} else {
 			alert("Enter a message")
 		}

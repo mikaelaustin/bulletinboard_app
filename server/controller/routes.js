@@ -57,7 +57,7 @@ router.post('/api/bulletins', function(req, res){
 
 //shows all messages from my table in the web browser
 router.get('/api/homepage', function(req, res){
-	pgClient.query("SELECT * FROM messages", (error,queryResTwo)=>{
+	pgClient.query("SELECT * FROM messages", function(error,queryResTwo){
 		if(error){
 			res.json(error)
 		} else {
@@ -78,15 +78,15 @@ router.delete('/api/delete-post/:id', function(req, res){
 
 //Put route so that I can click on and update messages in a modal.
 
-router.put('/api/update-post:id', function(req, res){
-	pgClient.query("UPDATE messages SET body=$1 WHERE id="+ req.params.id, function(err,res){
+router.put('/api/update-post/:id', function(req, res){
+	pgClient.query("UPDATE messages SET body=$1 WHERE id="+ req.params.id, [req.body.message] ,function(err,queryRes){
 		if(err){
-			console.log(error)
+			res.json(err)
 		} 
 		console.log("updated successfully")
-		res.json("Message has been updated")
-	})
-})
+		res.json(queryRes)
+	});
+});
 
 
 
