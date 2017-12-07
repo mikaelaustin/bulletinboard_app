@@ -1,4 +1,13 @@
 body{
-	background-color: #ffccff;
+	background-color: #9999ff;
 }
 
+.well{
+	background-color: #e6e6ff;
+	border-color: black;
+}
+
+#form-submit{
+	background-color: #000080;
+	border-color: white;
+}
